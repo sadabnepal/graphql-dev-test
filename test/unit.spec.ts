@@ -132,10 +132,8 @@ describe('test burger', () => {
         expect(createResult.data).to.haveOwnProperty('createBurger');
         expect(createResult.data.createBurger.success).satisfies((val: boolean) => val === true, 'Expected burger to be created successfully');
 
-        const burgerIdToDelete = createResult.data.createBurger.message.data.id;
-
         const deleteVariables = {
-            id: burgerIdToDelete
+            id: createResult.data.createBurger.message.data.id
         };
 
         const deleteResult = await graphql({ schema, source: mutation, variableValues: deleteVariables }) as IQueryResult<{ deleteBurger: { success: boolean, message: { result: string } } }>;
